@@ -1,5 +1,10 @@
 class GuessingGame
 
+    attr_accessor :secret_num 
+    # attr_reader :num_attempts, :game_over
+    
+
+
     def initialize(min, max)
         @secret_num = rand(min..max)
         @num_attempts = 0
@@ -16,20 +21,21 @@ class GuessingGame
 
     def check_num(num)
         @num_attempts += 1
-        if num > @secret_num
+        if num == @secret_num
+            @game_over = true
+            puts "you win"
+        elsif num > @secret_num
             puts "too big"
         elsif num < @secret_num
             puts "too small"
-        else
-            @game_over = true
-            puts "you win"
         end
     end
-
+    
     def ask_user
-        puts "Enter a number"
-        guess = gets.chomp.to_i
-        check_num(guess)
+        puts "entrer a number"
+        num_input = gets.chomp.to_i
+        self.check_num(num_input)
     end
+
 
 end
